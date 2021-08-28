@@ -1,5 +1,9 @@
 # Movement Pass
 
+## Live version
+
+* [Public facing application](https://movementpass.com)
+
 ## Background
 
 Few months ago Bangladesh Goverrment released an application where we the people can register and apply for movement pass during the lock down period for necessay reason. But unfortunayly it was sufering serious scalability issues (I had to refresh the web page handful of times just to complete the registration process, let alone the pass apply). It was told that on the very first day of its launch it was hit by 160 million requests, though it was not clear whether it was simple website hit or people applying for passes. Nevertheless, is is a scalability challenge, to my knowledge none of the local company or I believe the Government has the infrastructure to withstand such load. This seems a perfet candidate for a cloud hosted solutiom and in cloud both kubernetes and serverlees are taking the indutries by storm. Here we are going to explore the AWS serverless services that can we can use to create a scalable solution. Some of you may ask why not kubernetes instead of sererless, well the answer to it is that it is not an either/or thing, you can have both kubernetes and serverless on the same solution, but working with startups in last 5-6 years where resources(both financial and knowledge) are limited, I find serverless solution is more viable comparing to kubernetes as it is easier to get started, almost no admistration, auto and fast scaling, faster time to market, pay per usage which applies very much in startup enveionments. But it does not mean that serverless solution have limitation and short comings, in this solution we are going to explore those limitations and issues of serverless solution and how to overcome those challenges.
