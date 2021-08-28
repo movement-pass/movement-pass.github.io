@@ -2,7 +2,7 @@
 
 ## Setup
 
-When starting a new solution there are always some foundational work that we have to. Since we are hosting the solution in AWS, it is always recommended to create a new AWS Organization to host the solution. In this case I have created a new AWS Organization named `movement-pass` and an IAM user `dev@movement-pass` with administative privileges with only programatic access. Next, we need a domain to host the solution, so I registered a new domain `movement-pass.com` in Route53, when registrating the new domain from the AWS console, it automatically creates the Hosted Zone for us, if you are tranfering domain you have to do it manually. Please note that createing new AWS organization, IAM user or registring domain are all optional things in this case, but these are so common things that you have to do when starting a new solution I prefer to mention those, also note that apart from thee above manuual steps rest of the part are fully automated. The next important decision that we have to make is in which AWS region we are going to to deploy our solution, since our application would be used by our local users, the nearest region seems to be the Mumbai(`ap-south-1`), Singapore(`ap-southeast-1`) and Hongkong(`ap-east-1`), I find `ap-south-1` a bit more responsive compating others, so it would be our primary region.
+When starting a new solution there are always some foundational work that we have to. Since we are hosting the solution in AWS, it is always recommended to create a new AWS Organization to host the solution. In this case I have created a new AWS Organization named `movement-pass` and an IAM user `dev@movement-pass` with administative privileges with only programatic access. Next, we need a domain to host the solution, so I registered a new domain `movement-pass.com` in Route53, when registrating the new domain from the AWS console, it automatically creates the Hosted Zone for us, if you are tranfering domain you have to do it manually. Please note that createing new AWS organization, IAM user or registring domain are all optional things in this case, but these are so common things that you have to do when starting a new solution I prefer to mention those, also note that apart from thee above manuual steps rest of the part are fully automated. The next important decision that we have to make is in which AWS region we are going to to deploy our solution, since our application would be used by our local users, the nearest region seems to be the Mumbai(`ap-south-1`), Singapore(`ap-southeast-1`) and Hongkong(`ap-east-1`), I find `ap-south-1` a bit more responsive compating others when accessed from our country, so `ap-south-1` would be our primary region.
 
 ## Infrastructure as Code (IaC)
 
@@ -14,7 +14,7 @@ npm install -g aws-cdk
 
 ## ParameterStore
 
-When working with multi distribution unit we often have to share the same configuration values accross the deployment units. AWS ParameterStore of the Systems Manager is the perfect candidate to store and share configuration values accross the deployment units. The path or values of the configuration may differ based on .NET or NodeJS stack but the purpose is same.
+When working with multi distribution unit we often have to share the same configuration values accross the deployment units. AWS ParameterStore of the Systems Manager is the perfect candidate to store and share configuration values accross the deployment units. The path or values of the configuration may differ based on .NET or NodeJS stack but the purpose is the same.
 
 ## Stacks
 

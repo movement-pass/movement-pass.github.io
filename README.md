@@ -43,6 +43,7 @@ Here are the List of AWS services that I am planning to use and one or more of t
 - [ ] Athena
 - [ ] Cognito
 - [ ] Amplify
+- [x] X-Ray
 - [ ] CodeBuild
 - [ ] CodeDeploy
 - [ ] CodePipeline
@@ -53,4 +54,6 @@ Here are the List of AWS services that I am planning to use and one or more of t
 
 I am starting with both NodeJS and .NET and do have plan to implement it in Golang as well(though Golang is not as much as popular comparing to formers in our local community).
 
-TBD
+As mentioned in the above, that we are going to incrementally implement the features and as we progress new documents will be added in the following section:
+
+* [Foundation](/foundation.md)
