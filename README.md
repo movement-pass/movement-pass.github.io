@@ -2,7 +2,7 @@
 
 ## Live version
 
-* [Public facing application](https://movementpass.com)
+* [Public facing application](https://movement-pass.com)
 
 ## Background
 
