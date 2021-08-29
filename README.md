@@ -75,7 +75,7 @@ solution incrementally as we progress to completion.
 
 I am starting with both NodeJS and .NET and do have plan to implement it in Golang as well.
 
-As mentioned in the above, that we are going to incrementally implement the features and as we progress and new 
+As mentioned in the above, that we are going to incrementally implement the features and as we progress and new
 documents would be added in the following section:
 
 * [foundation](/foundation.md)

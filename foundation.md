@@ -29,6 +29,8 @@ because that is what your stack definition really is). Do make sure you have cdk
 npm install -g aws-cdk
 ```
 
+Yes, it is required regardless the language you use in CDK.
+
 ## ParameterStore
 
 When working with multi distribution unit we often have to share the same configuration values across the deployment
@@ -63,16 +65,17 @@ automatically created by cdk and would be invoked only once when it does the dns
 ### Jwt
 
 We are going to use jwt based authorization in our public facing application, this stack adds the jwt related
-configuration in the ParameterStore. Those who knows AWS Cognito may wonder why we are using our own jwt based
-implementation instead of Cognito, well the reason to use our own implementation is that at the time of writing there is
-no way to replicate Cognito users across different AWS regions, though it is possible to access AWS Congnito of one
-region from another region, but if the source region is down, then the public facing application would be down. But we
-do have plan to make our solution highly available with multi-region deployment, that is the reason we are going to
-store the user information in DynamoDB global table which automatically get replicated across regions. Another important
-thing to note that for the time being I am using symmetric key for the jwt, but prior production we defiantly have to
-change it to RSA based keys.
+configuration in the ParameterStore. Those who knows AWS Cognito may wonder why we are using our own user management
+instead of Cognito, well the reason to use our own implementation is that at the time of writing there is no way to
+replicate Cognito users across different AWS regions, though it is possible to access AWS Congnito of one region from
+another region, but if the source region is down, then the other region deployed unit which depends on it would be down
+too. But we do have plan to make our solution highly available with multi-region deployment, that is the reason we are
+going to store the user information in DynamoDB global table which automatically get replicated across regions. Another
+important thing to note that for the time being I am using symmetric key for the jwt, but prior production we defiantly
+have to change it to RSA based keys.
 
-**Note**: AWS Cognito would be used in management dashboard.
+**Note**: AWS Cognito would be used in management dashboard. If you are building single region solution, I highly
+recommend it instead of your own.
 
 ### Photos
 
