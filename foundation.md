@@ -80,9 +80,9 @@ recommend it instead of your own.
 ### Photos
 
 In our public facing application we need support to store the photos of users which they upload in the registration,
-this stack creates the S3 bucket to store the photos, it also associates a CloudFront distribution with
-domain `photos.movement-pass.com`. Please note that since photos will be severed through CloudFront the public access of
-the S3 bucket is completely disabled.
+this stack creates the S3 bucket to store the photos, creates a CloudFront distribution to serve the bucket content and
+also associates the domain `photos.movement-pass.com`. Please note that since photos will be severed through CloudFront 
+the public access of the S3 bucket is completely disabled.
 
 ### Database
 

@@ -105,10 +105,18 @@ function theRouter(controller: TheController): Router {
 }
 ```
 
+In the handlers you will find that I am directly using the AWS clients rather than using any abstraction which
+contradicts my earlier statement where I mention that our application logic should be independent of the infrastructure
+that it is running, but if you look at handlers codes closely you will find nothing in the code that you can treat as
+application logic per se, rules such as user cannot register with the same mobile phone number more than once, increment
+the applied count of user when a new pass request is received are handled at infrastructural level with DynamoDB
+conditional put and transactional write support. Maybe, in future I will refactor these handlers to make it independent
+of its underlying infrastructure.
+
 Till now, we have only discussed the application core but nothing on AWS side. The first thing is, we cannot run express
 application directly in lambda, in order to run it in lambda we are
 using [@vendia/serverless-express](https://github.com/vendia/serverless-express) which acts as an adapter between lambda
-and express environment, for this reason in the codebase you will find two entrypoint `./src/local.ts` for running
+and express environment and that is the reason in the codebase you will find two entrypoint `./src/local.ts` for running
 locally and `./src/lambda.ts` to run in lambda (there are other adapters are also available for other web frameworks to
 run in lambda). Next, we are using the new AWS SDK for JavaScript v3 which means instead of loading gigantic package (
 v2) we are only loading the aws libraries that we are using in our code that also reduces lambda package size
@@ -123,9 +131,12 @@ applications.
 
 There is nothing significant that worth to mention here, because most the things that we discussed in Node.js
 implementation are already available in .NET, for the mediator we are using
-the [MediatR](https://github.com/jbogard/MediatR) nuget package and like Node.js the .NET implementation also has two
-entrypoint, one for local and other when running in lambda. One additional thing in the .NET implementation is the Open
-API specification which is missing in the Node.js implementation.
+the [MediatR](https://github.com/jbogard/MediatR) nuget package. To make the ParameterStore configuration values
+available in .NET configuration system the nuget
+package [Amazon.Extensions.Configuration.SystemsManager](https://github.com/aws/aws-dotnet-extensions-configuration) of
+AWS is used. And like Node.js the .NET implementation also has two entrypoint, one for local and other when running in
+lambda. One additional thing in the .NET implementation is the Open API specification which is missing in the Node.js
+implementation.
 
 ## Stack
 

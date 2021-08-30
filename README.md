@@ -80,6 +80,7 @@ I am starting with both Node.js and .NET and do have plan to implement it in Gol
 As mentioned in the above, that we are going to incrementally implement the features and as we progress and new
 documents would be added in the following section:
 
-* [foundation](/foundation.md)
-* [public-api](/public-api.md)
-* [public-web](/public-web.md)
+1. [foundation](/foundation.md)
+2. [public-api](/public-api.md)
+3. [public-web](/public-web)
+4. [ci/cd Pipeline](/ci-cd-pipeline.md)
