@@ -82,5 +82,5 @@ documents would be added in the following section:
 
 1. [foundation](/foundation.md)
 2. [public-api](/public-api.md)
-3. [public-web](/public-web)
+3. [public-web](/public-web.md)
 4. [ci/cd Pipeline](/ci-cd-pipeline.md)
