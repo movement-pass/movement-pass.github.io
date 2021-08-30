@@ -4,7 +4,7 @@ Public API is REST API that is consumed by the public facing application. You ca
 here <https://public-api.movement-pass.com/v1/index.html>. The `identity` endpoint is responsible for user
 registration/login and the `passes` endpoint which can be only accessed by authenticated users for applying and viewing
 the pass/passes. As mentioned previously we have both NodeJS and .NET implementation but the input/output of the API are
-identical.
+identical. The public api is hosted in lambda and expose by API Gateway.
 
 ## NodeJS
 
@@ -40,4 +40,77 @@ has its own set of dependencies and this chain can go on and on and while in dev
 existing features we often have to add/remove these dependencies. We can of course create these whole objects graph
 manually, but it becomes tedious and painful very quickly. So rather than doing it manually we register our dependencies
 in DI container and when required we ask the container to create for us. There are many DI container available in
-typescript but in this solution we are using [tsyringe](https://github.com/microsoft/tsyringe) by Microsoft.
+typescript but in this solution we are using [tsyringe](https://github.com/microsoft/tsyringe) by Microsoft. To register
+dependencies that is coded by you all you have to do is decorate it with `@injectable` decorator, for external
+dependencies string based is used here. Now talking about the decorators, we have to write a decorator `@handles`
+of our own which adds metadata to handler that the mediator uses to find the correct handler to delegate the request
+processing. Here is declaration of typical request, result and handler:
+
+```typescript
+class TheRequest extends Request {
+    /* */
+}
+
+interface TheResult {
+    /* */
+}
+
+@injectable()
+@handles(TheRequest)
+class TheHandler extends Handler<TheRequest, TheResult> {
+    constructor(
+        @inject('DynamoDB') private readonly _dynamodb: DynamoDBDocumentClient,
+        private readonly _config: Config
+    ) {
+        super();
+    }
+
+    async handle(request: TheRequest): Promise<TheResult> {
+        /* */
+    }
+}
+```
+
+Controller:
+
+```typescript
+class TheController {
+    constructor(private readonly _mediator: Mediator) {
+    }
+
+    async theAction(req: Request, res: Response): Promise<void> {
+        const request = new TheRequest(req.body);
+
+        const result = await this._mediator.send<TheResult, TheRequst>(request);
+
+        res.send(result);
+    }
+}
+```
+
+Router:
+
+```typescript
+function theRouter(controller: TheController): Router {
+    const router = express.Router();
+
+    router.post(
+        '/',
+        validate(requestSchema),
+        async (req: Request, res: Response) => controller.theAction(req, res)
+    );
+
+    return router;
+}
+```
+
+Till now, we have only discussed the application core but nothing on AWS side. The first thing, we cannot run express
+application directly in lambda, in order to run it in lambda we are
+using [@vendia/serverless-express](https://github.com/vendia/serverless-express) which acts as an adapter between lambda
+and express, for this reason in the codebase you will find two entrypoint `./src/local.ts` for running locally
+and `./src/lambda.ts` to run in lambda (there are other adapters are also available for other web frameworks to run in
+lambda). Next, we are using the new AWS SDK for JavaScript v3 which means instead of loading gigantic package (v2) we
+are only loading the aws libraries that we are using in our code that also reduces lambda package size drastically. The
+last thing I want to mention when packing the code we are also using another npm
+package [@vercel/ncc](https://github.com/vercel/ncc) that compiles the node.js code into a single file which enhance the
+runtime, this is not a lambda specific thing you can use the same technique to your other server applications.
