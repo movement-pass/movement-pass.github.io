@@ -3,15 +3,15 @@
 Public API is REST API that is consumed by the public facing application. You can find the Open Api specification over
 here <https://public-api.movement-pass.com/v1/index.html>. The `identity` endpoint is responsible for user
 registration/login and the `passes` endpoint which can be only accessed by authenticated users for applying and viewing
-the pass/passes. As mentioned previously we have both Node.js and .NET implementation but the input/output of the API are
-identical. The public api is hosted in lambda and exposed by API Gateway.
+the pass/passes. As mentioned previously we have both Node.js and .NET implementation but the input/output of the API
+are identical. The public api is hosted in lambda and exposed by API Gateway.
 
 ## Node.js
 
 [Node.js public api repository](https://github.com/movement-pass/node-public-api)
 
-The Node.js implementation is an Express.js application written in typescript. Most of the common construct of express is
-used but the implementation is not typical that you usually see in regular express applications. The patterns and
+The Node.js implementation is an Express.js application written in typescript. Most of the common construct of express
+is used but the implementation is not typical that you usually see in regular express applications. The patterns and
 principles that are used here are originated from the .NET community, I find nothing wrong even do recommend bringing
 the principles and practises from other communities which helps you to build better software. Let's see the high level
 diagram of this express application:
@@ -114,7 +114,7 @@ run in lambda). Next, we are using the new AWS SDK for JavaScript v3 which means
 v2) we are only loading the aws libraries that we are using in our code that also reduces lambda package size
 drastically. The last thing I want to mention when packing the code we are using another npm
 package [@vercel/ncc](https://github.com/vercel/ncc) that compiles the node.js code into a single file which enhance the
-runtime performance, this is not a lambda specific thing you can use the same technique in your other server
+runtime performance, this is not a lambda specific thing, you can use the same technique in your other server
 applications.
 
 ## .NET
@@ -126,3 +126,10 @@ implementation are already available in .NET, for the mediator we are using
 the [MediatR](https://github.com/jbogard/MediatR) nuget package and like Node.js the .NET implementation also has two
 entrypoint, one for local and other when running in lambda. One additional thing in the .NET implementation is the Open
 API specification which is missing in the Node.js implementation.
+
+## Stack
+
+Each of the implementation has its own Stack though both them does the identical job. That is creating the Api Gateway
+and Lambda, attach the lambda with the Api Gateway, gives the read and write permission of DynamoDB tables and read
+permission of ParameterStore to the lambda and finally associate the public-api.movement-pass.com domain with the API
+gateway.
