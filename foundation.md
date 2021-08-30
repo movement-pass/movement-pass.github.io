@@ -35,7 +35,7 @@ Yes, it is required regardless the language you use in CDK.
 
 When working with multi distribution unit we often have to share the same configuration values across the deployment
 units. AWS ParameterStore of the Systems Manager is the perfect candidate to store and share configuration values across
-the deployment units. The path or values of the configuration may differ based on .NET or NodeJS stack but the purpose
+the deployment units. The path or values of the configuration may differ based on .NET or Node.js stack but the purpose
 is the same.
 
 ## Stacks

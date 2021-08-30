@@ -73,7 +73,9 @@ solution incrementally as we progress to completion.
 
 ## Implementation
 
-I am starting with both NodeJS and .NET and do have plan to implement it in Golang as well.
+![Current snapshot](media/movement-pass-v1.png)
+
+I am starting with both Node.js and .NET and do have plan to implement it in Golang as well.
 
 As mentioned in the above, that we are going to incrementally implement the features and as we progress and new
 documents would be added in the following section:
