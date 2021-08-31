@@ -1,9 +1,9 @@
 # CI/CD pipeline
 
-Until we set up a full-blown CI/CD pipeline with CodeBuild, CodeDeploy and CodePipeline, lets use GitHub Action as an
+Until we set up a full-blown CI/CD pipeline with CodeBuild, CodeDeploy and CodePipeline, lets use GitHub Actions as an
 intermediary solution. Please note that from GitHub we are not going to apply any infrastructural changes only change in
 the implementation will be deployed. So far we have two deployment unit a lambda function and a s3 bucket that serves
-the React app. In order to deploy an IAM user has been created which access and secret key would be used in the
+the React app. In order to deploy, an IAM user has been created which access and secret key would be used in the
 deployment. I created an IAM policy with the following permissions and attached it with that IAM user:
 
 ```json
