@@ -1,6 +1,6 @@
 # Public Web
 
-[React public web repository](https://github.com/movement-pass/https://github.com/movement-pass/react-public-web)
+[React public web repository](https://github.com/movement-pass/react-public-web)
 
 The public facing application is implemented in React and written in JavaScript. There are no state management library (
 e.g. redux,recoil) is used. Since I am not a UI/UX Guy I need a rich component suite that is the
